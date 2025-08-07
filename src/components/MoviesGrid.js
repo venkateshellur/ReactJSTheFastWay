@@ -52,6 +52,8 @@ export default function MoviesGrid() {
     }
   };
 
+  const genereList = [...new Set(movies.map((movie) => movie.genre))].sort();
+
   const filteredMovis = movies.filter(
     (movie) =>
       matchesSearchTerm(movie, searchTerm) &&
@@ -70,7 +72,7 @@ export default function MoviesGrid() {
       />
 
       <div className="filter-bar">
-        <div className="filter-slot">
+        {/* <div className="filter-slot">
           <label>Genre:</label>
           <select
             className="filter-dropdown"
@@ -81,6 +83,21 @@ export default function MoviesGrid() {
             <option>Drama</option>
             <option>Action</option>
             <option>Thriller</option>
+          </select>
+        </div> */}
+
+        {/* Trying on my own to create the Genere list from the movies json file */}
+        <div className="filter-slot">
+          <label>Genre:</label>
+          <select
+            className="filter-dropdown"
+            value={genere}
+            onChange={handleGenereChange}
+          >
+            <option>All Genere</option>
+            {genereList.map((genre) => (
+              <option>{genre}</option>
+            ))}
           </select>
         </div>
 
