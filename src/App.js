@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 function App() {
   const [movies, setMovies] = useState([]);
   const [Watchlist, setWatchlist] = useState([]);
+  const [Watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
     fetch("movies.json")
