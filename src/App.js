@@ -17,7 +17,7 @@ function App() {
       .then((data) => setMovies(data));
   }, []);
 
-  const tollgeWatchlist = (movieId) => {
+  const toggleWatchlist = (movieId) => {
     setWatchlist((prev) =>
       prev.includes(movieId)
         ? prev.filter((id) => id !== movieId)
@@ -39,8 +39,26 @@ function App() {
             </ul>
           </nav>
           <Routes>
-            <Route path="/" element={<MoviesGrid movies={movies} />}></Route>
-            <Route path="/Watchlist" element={<Watchlist />}></Route>
+            <Route
+              path="/"
+              element={
+                <MoviesGrid
+                  movies={movies}
+                  watchlist={Watchlist}
+                  toggleWatchlist={toggleWatchlist}
+                />
+              }
+            ></Route>
+            <Route
+              path="/Watchlist"
+              element={
+                <Watchlist
+                  movies={movies}
+                  watchlist={Watchlist}
+                  toggleWatchlist={toggleWatchlist}
+                />
+              }
+            ></Route>
           </Routes>
         </Router>
       </div>
