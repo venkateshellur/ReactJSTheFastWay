@@ -6,6 +6,8 @@ import MovieCard from "./MovieCard";
 export default function MoviesGrid() {
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [genere, setGenere] = useState("All Genere");
+  const [rating, setRating] = useState("All");
 
   useEffect(() => {
     fetch("movies.json")
@@ -30,6 +32,30 @@ export default function MoviesGrid() {
         value={searchTerm}
         onChange={handleSearchChange}
       />
+
+      <div className="filter-bar">
+        <div className="filter-slot">
+          <label>Genre:</label>
+          <select>
+            <option value="All Genere">All Genere</option>
+            <option value="Drama">Drama</option>
+            <option value="Action">Action</option>
+            <option value="Thriller">Thriller</option>
+          </select>
+        </div>
+        <div className="filter-slot">
+          <label>Rating:</label>
+          <select>
+            <option value="All">All</option>
+            <option value="8">Good</option>
+            <option value="5">Ok</option>
+            <option value="0">bad</option>
+          </select>
+        </div>
+        <div className="filter-slot">
+          <label>Rating:</label>
+        </div>
+      </div>
       <div className="movies-grid">
         {filteredMovis.map((filteredMovis) => (
           <MovieCard movie={filteredMovis} />
