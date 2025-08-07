@@ -4,12 +4,12 @@ import "./styles.css"; // Assuming you have a styles.css file for additional sty
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MoviesGrid from "./components/MoviesGrid";
-import Watchlist from "./components/Watchlist"; // Importing Watchlist component
+import Watchlist from "./components/Watchlist";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
   const [movies, setMovies] = useState([]);
-  const [Watchlist, setWatchlist] = useState([]);
+  const [watchlist, setWatchlist] = useState([]);
 
   useEffect(() => {
     fetch("movies.json")
@@ -44,7 +44,7 @@ function App() {
               element={
                 <MoviesGrid
                   movies={movies}
-                  watchlist={Watchlist}
+                  watchlist={watchlist}
                   toggleWatchlist={toggleWatchlist}
                 />
               }
@@ -54,7 +54,7 @@ function App() {
               element={
                 <Watchlist
                   movies={movies}
-                  watchlist={Watchlist}
+                  watchlist={watchlist}
                   toggleWatchlist={toggleWatchlist}
                 />
               }
