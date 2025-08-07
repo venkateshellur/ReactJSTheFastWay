@@ -19,8 +19,44 @@ export default function MoviesGrid() {
     setSearchTerm(e.target.value);
   };
 
-  const filteredMovis = movies.filter((movie) =>
-    movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+  const handleGenereChange = (e) => {
+    setGenere(e.target.value);
+  };
+
+  const handleRatingChange = (e) => {
+    setRating(e.target.value);
+  };
+
+  const matchesGenere = (movie, genere) => {
+    console.log("matchesGenere called with:", movie, genere);
+    return (
+      genere === "All Genere" ||
+      movie.genre.toLowerCase() === genere.toLowerCase()
+    );
+  };
+
+  const matchesSearchTerm = (movie, searchTerm) => {
+    return movie.title.toLowerCase().includes(searchTerm.toLowerCase());
+  };
+
+  const matchesRating = (movie, rating) => {
+    switch (rating) {
+      case "Good":
+        return movie.rating >= 8;
+      case "Ok":
+        return movie.rating >= 5 && movie.rating < 8;
+      case "bad":
+        return movie.rating < 5;
+      default:
+        return true; // If no rating filter is applied
+    }
+  };
+
+  const filteredMovis = movies.filter(
+    (movie) =>
+      matchesSearchTerm(movie, searchTerm) &&
+      matchesGenere(movie, genere) &&
+      matchesRating(movie, rating)
   );
 
   return (
@@ -36,20 +72,29 @@ export default function MoviesGrid() {
       <div className="filter-bar">
         <div className="filter-slot">
           <label>Genre:</label>
-          <select>
-            <option value="All Genere">All Genere</option>
-            <option value="Drama">Drama</option>
-            <option value="Action">Action</option>
-            <option value="Thriller">Thriller</option>
+          <select
+            className="filter-dropdown"
+            value={genere}
+            onChange={handleGenereChange}
+          >
+            <option>All Genere</option>
+            <option>Drama</option>
+            <option>Action</option>
+            <option>Thriller</option>
           </select>
         </div>
+
         <div className="filter-slot">
           <label>Rating:</label>
-          <select>
-            <option value="All">All</option>
-            <option value="8">Good</option>
-            <option value="5">Ok</option>
-            <option value="0">bad</option>
+          <select
+            className="filter-dropdown"
+            value={rating}
+            onChange={handleRatingChange}
+          >
+            <option>All</option>
+            <option>Good</option>
+            <option>Ok</option>
+            <option>bad</option>
           </select>
         </div>
         <div className="filter-slot">
