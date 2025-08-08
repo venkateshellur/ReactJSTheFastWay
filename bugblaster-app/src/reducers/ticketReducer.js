@@ -10,10 +10,11 @@ export default function tickerReducer(state, action) {
         ),
       };
     case "DELETE_TICKET":
+      console.log(action.payload.id);
       return {
         ...state,
-        tickets: state.tickets.filter((ticket) =>
-          ticket.id !== action.payload.id ? action.payload : ticket
+        tickets: state.tickets.filter(
+          (ticket) => ticket.id !== action.payload.id
         ),
       };
     default:
