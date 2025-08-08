@@ -15,6 +15,15 @@ export default function TicketForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const ticketData = {
+      id: new Date().toISOString(),
+      title,
+      description,
+      priority,
+    };
+    console.log(ticketData);
+
     clearForm();
   };
 
