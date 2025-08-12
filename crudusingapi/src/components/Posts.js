@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getPosts } from "../services/postService";
+import { getPosts, deletePost } from "../services/postService";
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
@@ -14,9 +14,16 @@ export default function Posts() {
 
     // const resp = getPosts();
     // console.log(resp);
-
     //console.log(displayData());
   }, []);
+
+  const handleDelete = (id) => {
+    deletePost(id)
+      .then(setPosts(posts.filter((post) => post.id !== id)))
+      .then(alert("Delete Successful"))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div>
       <h1>Posts</h1>
@@ -25,9 +32,12 @@ export default function Posts() {
           return (
             <li key={post.id}>
               <p>
-                <h2>{post.userId}</h2>
+                <h2>{post.id}</h2>
                 <h3>{post.title}</h3>
                 <h4>{post.body}</h4>
+                <button value={post.id} onClick={() => handleDelete(post.id)}>
+                  Delete Post
+                </button>
               </p>
             </li>
           );
