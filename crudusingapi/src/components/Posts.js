@@ -4,6 +4,7 @@ import CreatePost from "./CreatePost";
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
+  const [editingPost, setEditingPost] = useState(null);
 
   useEffect(() => {
     getPosts()
@@ -25,6 +26,10 @@ export default function Posts() {
       .catch((err) => console.log(err));
   };
 
+  const startEditing = (post) => {
+    setEditingPost(post);
+  };
+
   return (
     <div>
       <CreatePost posts={posts} setPosts={setPosts}></CreatePost>
@@ -36,9 +41,9 @@ export default function Posts() {
               <h2>{post.id}</h2>
               <h3>{post.title}</h3>
               <h4>{post.body}</h4>
-              <button value={post.id} onClick={() => handleDelete(post.id)}>
-                Delete Post
-              </button>
+              <button onClick={() => startEditing(post)}>Edit Post</button>
+              <button onClick={() => handleDelete(post.id)}>Delete Post</button>
+
               <div></div>
             </li>
           );
