@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getPosts, deletePost } from "../services/postService";
+import CreatePost from "./CreatePost";
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
@@ -26,19 +27,19 @@ export default function Posts() {
 
   return (
     <div>
+      <CreatePost posts={posts} setPosts={setPosts}></CreatePost>
       <h1>Posts</h1>
       <ul>
         {posts.map((post) => {
           return (
             <li key={post.id}>
-              <p>
-                <h2>{post.id}</h2>
-                <h3>{post.title}</h3>
-                <h4>{post.body}</h4>
-                <button value={post.id} onClick={() => handleDelete(post.id)}>
-                  Delete Post
-                </button>
-              </p>
+              <h2>{post.id}</h2>
+              <h3>{post.title}</h3>
+              <h4>{post.body}</h4>
+              <button value={post.id} onClick={() => handleDelete(post.id)}>
+                Delete Post
+              </button>
+              <div></div>
             </li>
           );
         })}
