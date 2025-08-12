@@ -32,7 +32,12 @@ export default function Posts() {
 
   return (
     <div>
-      <CreatePost posts={posts} setPosts={setPosts}></CreatePost>
+      <CreatePost
+        posts={posts}
+        setPosts={setPosts}
+        editingPost={editingPost}
+        setEditingPost={setEditingPost}
+      ></CreatePost>
       <h1>Posts</h1>
       <ul>
         {posts.map((post) => {
