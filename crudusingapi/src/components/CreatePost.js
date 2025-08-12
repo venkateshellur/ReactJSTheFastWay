@@ -1,9 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createPost } from "../services/postService";
 
-export default function CreatePost({ posts, setPosts }) {
+export default function CreatePost({
+  posts,
+  setPosts,
+  editingPost,
+  setEditingPost,
+}) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+
+  useEffect(() => {
+    if (editingPost) {
+      setTitle(editingPost.title);
+      setBody(editingPost.body);
+    } else {
+      setTitle("");
+      setBody("");
+    }
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,7 +49,7 @@ export default function CreatePost({ posts, setPosts }) {
         onChange={(e) => setBody(e.target.value)}
       ></textarea>
       <div></div>
-      <button type="submit"> Add Post</button>
+      <button type="submit">{editingPost ? "Update Post" : "Add Post"}</button>
     </form>
   );
 }
