@@ -6,4 +6,8 @@ const api = axios.create({
 
 const getPosts = () => api.get("/posts");
 
+// async function getPosts() {
+//   return api.get("/posts");
+// }
+
 export { getPosts };
