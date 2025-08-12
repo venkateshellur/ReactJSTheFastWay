@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createPost } from "../services/postService";
 
-export default function CreatePost({ post, setPost }) {
+export default function CreatePost({ posts, setPosts }) {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
 
@@ -14,6 +14,7 @@ export default function CreatePost({ post, setPost }) {
 
   const addPost = () => {
     createPost({ title, body })
+      .then((resp) => setPosts([...posts, resp.data]))
       .then(alert("Added Post Successful"))
       .catch((err) => console.log(err));
   };
