@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { createPost } from "../services/postService";
+import { createPost, updatePost } from "../services/postService";
 
 export default function CreatePost({
   posts,
@@ -18,11 +18,11 @@ export default function CreatePost({
       setTitle("");
       setBody("");
     }
-  });
+  }, [editingPost]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    addPost();
+    editingPost ? editPost() : addPost();
     setTitle("");
     setBody("");
   };
@@ -31,6 +31,19 @@ export default function CreatePost({
     createPost({ title, body })
       .then((resp) => setPosts([...posts, resp.data]))
       .then(alert("Added Post Successful"))
+      .catch((err) => console.log(err));
+  };
+
+  const editPost = () => {
+    console.log(editingPost.id);
+    updatePost(editingPost.id, { title, body })
+      .then((resp) =>
+        setPosts(
+          posts.map((post) => (post.id === editingPost.id ? resp.data : post))
+        )
+      )
+      .then(setEditingPost(null))
+      .then(alert("Updated Post Successful"))
       .catch((err) => console.log(err));
   };
 
