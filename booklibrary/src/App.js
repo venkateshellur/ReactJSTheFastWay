@@ -9,6 +9,7 @@ import {
   route,
   Navigate,
 } from "react-router-dom";
+import BookDetails from "./components/BookDetails";
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Books></Books>}></Route>
           <Route path="/books" element={<Navigate to="/" />}></Route>
+          <Route
+            path="/books/:bookId"
+            element={<BookDetails></BookDetails>}
+          ></Route>
         </Routes>
       </Router>
     </BooksProvider>
