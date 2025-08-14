@@ -7,6 +7,9 @@ export default function BookDetails() {
   const books = useContext(BooksContext);
   const book = books.find((b) => b.id === parseInt(bookId));
 
+  if (books.length === 0) {
+    return <div> Loading....</div>;
+  }
   if (book == null) {
     return <div> Book not found for the provided id {bookId}</div>;
   } else
